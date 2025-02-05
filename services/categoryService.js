@@ -1,5 +1,7 @@
 const CategoryModal = require("../models/categoryModel");
 const slugify = require("slugify");
+const ApiError = require("../utils/apiError");
+const asyncHandler = require('express-async-handler')
 
 exports.createCategory = async (req, res) => {
   try {
@@ -79,12 +81,77 @@ exports.deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const category = await CategoryModal.findOneAndDelete({ _id: id }); // or `findByIdAndDelete(id)`
-    if (!category)
+    if (!category) 
       return res
-        .status(404)
-        .json({ message: `Category not found with id: ${id}` });
+      .status(404)
+      .json({ message: `Category not found with id: ${id}` });
     res.status(204).send();
   } catch (err) {
     res.status(500).json({ message: `Error deleting category: ${err}` });
   }
 };
+
+// =============================================================
+
+// Note the error handling notes
+
+// // 1. Sending the error directly
+// exports.deleteCategory = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const category = await CategoryModal.findOneAndDelete({ _id: id });
+    
+//     // Here is the point
+//     if (!category) {
+//       return res
+//       .status(404)
+//       .json({ message: `Category not found with id: ${id}` });
+//     }
+
+//     res.status(204).send();
+//   } catch (err) {
+//     res.status(500).json({ message: `Error deleting category: ${err}` });
+//   }
+// };
+
+// // 2. Passing the error to the global error handler
+// exports.deleteCategory = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const category = await CategoryModal.findOneAndDelete({ _id: id });
+    
+//     // Here is the point
+//     if (!category) {
+//       return next(new Error(`Category not found with id: ${id}`));
+//     }
+
+//     res.status(204).send();
+//   } catch (err) {
+//     next(new Error(`Error deleting category: ${err}`));
+//   }
+// };
+
+// // 3. Passing the error to the global error handler using the ApiError class
+// exports.deleteCategory = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const category = await CategoryModal.findOneAndDelete({ _id: id });
+    
+//     // Here is the point
+//     if (!category) {
+//       return next(new ApiError(404, `Category not found with id: ${id}`));
+//     }
+
+//     res.status(204).send();
+//   } catch (err) {
+//     next(new ApiError(500, `Error deleting category: ${err}`));
+//   }
+// };
+
+// // 4. Using express-async-handler (No need to use try/catch here)
+// exports.deleteCategory = asyncHandler(async (req, res, next) => {
+//   const { id } = req.params;
+//   const category = await CategoryModal.findOneAndDelete({ _id: id });
+//   if (!category)  return next(new ApiError(404, `Category not found with id: ${id}`));
+//   res.status(204).send();
+// });

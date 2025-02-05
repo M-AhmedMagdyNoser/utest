@@ -55,6 +55,8 @@ Starting to create the folder structure and the CRUD routes
 
 =================================================
 
+// Pagination
+
 // Without pagination
 exports.getCategories = async (req, res) => {
   try {
@@ -83,3 +85,9 @@ exports.getCategories = async (req, res) => {
   }
 };
 
+=================================================
+
+Error Handling
+- See deleteCategory examples
+- See global error handler in server.js
+- See utils/apiError
