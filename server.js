@@ -34,10 +34,20 @@ app.use((err, req, res, next) => {
     status: err.status || "error",
     statusCode: err.statusCode || 500,
     message: err.message,
-    stack: err.stack
+    ...process.env.NODE_ENV === "development" ? { stack: err.stack } : {}
    });
 });
 
 // Start the server
 const PORT = process.env.PORT || 5145;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+const server = app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Unhandled rejection: ${err}`);
+  server.close(() => {
+    console.log(`Shutting down the server due to unhandled promise rejection`);
+    process.exit(1);
+  });
+});

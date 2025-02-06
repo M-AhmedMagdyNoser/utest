@@ -89,5 +89,5 @@ exports.getCategories = async (req, res) => {
 
 Error Handling
 - See deleteCategory examples
-- See global error handler in server.js
-- See utils/apiError
+- See global error handler in server.js + unhandled rejection
+- See utils/apiError.js
