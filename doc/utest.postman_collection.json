@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Hello World 1\",\r\n    \"description\": \"this the hello World category num 1\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Women\",\r\n    \"description\": \"this is the women category\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,7 +93,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"updated 2\"\r\n}",
+							"raw": "{\r\n    \"title\": \"updated category\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,7 +130,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{LH}}/api/v1/categories/67a327811bd63f1f49d3132d",
+							"raw": "{{LH}}/api/v1/categories/67a5d9ed1fc954d01a631d63",
 							"host": [
 								"{{LH}}"
 							],
@@ -138,7 +138,147 @@
 								"api",
 								"v1",
 								"categories",
-								"67a327811bd63f1f49d3132d"
+								"67a5d9ed1fc954d01a631d63"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subcategories",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LH}}/api/v1/subcategories?page=1&limit=15",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"subcategories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"this the test subcategory\",\r\n    \"category\": \"67a5d9bf1fc954d01a631d5d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LH}}/api/v1/subcategories",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"subcategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LH}}/api/v1/subcategories/67a5f0b727b2993589ae7393",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"subcategories",
+								"67a5f0b727b2993589ae7393"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"updated category\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LH}}/api/v1/subcategories/67a5f0b727b2993589ae7393",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"subcategories",
+								"67a5f0b727b2993589ae7393"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"updated 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LH}}/api/v1/subcategories/67a5f0b727b2993589ae7393",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"subcategories",
+								"67a5f0b727b2993589ae7393"
 							]
 						}
 					},
