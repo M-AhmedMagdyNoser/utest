@@ -121,3 +121,7 @@ npm i -D eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-import
     "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }]
   }
 }
+
+=================================================
+
+Population > See the population example in services/subcategoryService.js
