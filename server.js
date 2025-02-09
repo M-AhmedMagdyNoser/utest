@@ -7,6 +7,7 @@ const ApiError = require("./utils/apiError");
 const categoryRoute = require("./routes/categoryRoute");
 const subcategoryRoute = require("./routes/subcategoryRoute");
 const brandRoute = require("./routes/brandRoute");
+const productRoute = require("./routes/productRoute");
 
 dotenv.config({ path: "./config.env" });
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => res.send("App is running"));
 app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/subcategories", subcategoryRoute);
 app.use("/api/v1/brands", brandRoute);
+app.use("/api/v1/products", productRoute);
 
 app.use("*", (req, res, next) => {
   next(new ApiError(404, `This route does not exist: ${req.originalUrl}`));
