@@ -150,6 +150,34 @@
 			"name": "Subcategories",
 			"item": [
 				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"this the test subcategory\",\r\n    \"category\": \"67a5d9bf1fc954d01a631d5d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LH}}/api/v1/subcategories",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"subcategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "list",
 					"request": {
 						"method": "GET",
@@ -173,34 +201,6 @@
 									"key": "limit",
 									"value": "15"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"this the test subcategory\",\r\n    \"category\": \"67a5d9bf1fc954d01a631d5d\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{LH}}/api/v1/subcategories",
-							"host": [
-								"{{LH}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"subcategories"
 							]
 						}
 					},
@@ -233,7 +233,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"updated category\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Updated Subategory\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,7 +241,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{LH}}/api/v1/subcategories/67a5f0b727b2993589ae7393",
+							"raw": "{{LH}}/api/v1/subcategories/67a5f09b27b2993589ae738f",
 							"host": [
 								"{{LH}}"
 							],
@@ -249,7 +249,7 @@
 								"api",
 								"v1",
 								"subcategories",
-								"67a5f0b727b2993589ae7393"
+								"67a5f09b27b2993589ae738f"
 							]
 						}
 					},
@@ -270,7 +270,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{LH}}/api/v1/subcategories/67a5f0b727b2993589ae7393",
+							"raw": "{{LH}}/api/v1/subcategories/67a743e3089c3670ce81a488",
 							"host": [
 								"{{LH}}"
 							],
@@ -278,7 +278,147 @@
 								"api",
 								"v1",
 								"subcategories",
-								"67a5f0b727b2993589ae7393"
+								"67a743e3089c3670ce81a488"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Brands",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LH}}/api/v1/brands?page=1&limit=15",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"brands"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dell\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LH}}/api/v1/brands",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LH}}/api/v1/brands/67a833a60b3ac4db80adc98f",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"brands",
+								"67a833a60b3ac4db80adc98f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Samsung\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LH}}/api/v1/brands/67a833a60b3ac4db80adc98f",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"brands",
+								"67a833a60b3ac4db80adc98f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LH}}/api/v1/brands/67a833a60b3ac4db80adc98f",
+							"host": [
+								"{{LH}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"brands",
+								"67a833a60b3ac4db80adc98f"
 							]
 						}
 					},
