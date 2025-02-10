@@ -1,5 +1,8 @@
 const { body, param } = require("express-validator");
 const validatorMiddleware = require("../../middlewares/validatorMiddleware");
+const BrandModal = require("../../models/brandModel");
+const CategoryModal = require("../../models/categoryModel");
+const SubcategoryModal = require("../../models/subcategoryModel");
 
 exports.createProductValidator = [
   body("title").notEmpty().withMessage("Product title is required.").trim(),
@@ -23,17 +26,6 @@ exports.createProductValidator = [
         );
       else return true;
     }),
-  body("brand").optional().isMongoId().withMessage("Invalid brand id format."),
-  body("category")
-    .notEmpty()
-    .withMessage("Product category is required.")
-    .isMongoId()
-    .withMessage("Invalid category id format."),
-  body("subcategory")
-    .notEmpty()
-    .withMessage("Product subcategory is required.")
-    .isMongoId()
-    .withMessage("Invalid subcategory id format."),
   body("quantity")
     .notEmpty()
     .withMessage("Product quantity is required.")
@@ -47,16 +39,50 @@ exports.createProductValidator = [
     .withMessage("Product sold must be a number.")
     .isInt()
     .withMessage("Product sold must be an integer."),
+  body("brand")
+    .optional()
+    .isMongoId()
+    .withMessage("Invalid brand id format.")
+    .custom(async (value) => {
+      const brand = await BrandModal.findById(value);
+      if (!brand) throw new Error(`Brand not found with id: ${value}.`);
+      return true;
+    }),
+  body("category")
+    .notEmpty()
+    .withMessage("Product category is required.")
+    .isMongoId()
+    .withMessage("Invalid category id format.")
+    .custom(async (value) => {
+      const category = await CategoryModal.findById(value);
+      if (!category) throw new Error(`Category not found with id: ${value}.`);
+      return true;
+    }),
+  body("subcategory")
+    .notEmpty()
+    .withMessage("Product subcategory is required.")
+    .isMongoId()
+    .withMessage("Invalid subcategory id format.")
+    .custom(async (value, { req }) => {
+      const subcategory = await SubcategoryModal.findById(value);
+      if (!subcategory)
+        throw new Error(`Subcategory not found with id: ${value}.`);
+      else if (subcategory.category.toString() !== req.body.category)
+        throw new Error(
+          `The subcategory provided does not belong to the category provided.`
+        );
+      return true;
+    }),
   validatorMiddleware,
 ];
 
 exports.getProductValidator = [
-  param("id").isMongoId().withMessage("Invalid product id format"),
+  param("id").isMongoId().withMessage("Invalid product id format."),
   validatorMiddleware,
 ];
 
 exports.updateProductValidator = [
-  param("id").isMongoId().withMessage("Invalid product id format"),
+  param("id").isMongoId().withMessage("Invalid product id format."),
   body("title").optional().trim(),
   body("description").optional().trim(),
   body("price").optional().isNumeric().withMessage("Price must be a number."),
@@ -71,15 +97,6 @@ exports.updateProductValidator = [
         );
       else return true;
     }),
-  body("brand").optional().isMongoId().withMessage("Invalid brand id format."),
-  body("category")
-    .optional()
-    .isMongoId()
-    .withMessage("Invalid category id format."),
-  body("subcategory")
-    .optional()
-    .isMongoId()
-    .withMessage("Invalid subcategory id format."),
   body("quantity")
     .optional()
     .isNumeric()
@@ -92,6 +109,38 @@ exports.updateProductValidator = [
     .withMessage("Sold must be a number.")
     .isInt()
     .withMessage("Sold must be an integer."),
+  body("brand")
+    .optional()
+    .isMongoId()
+    .withMessage("Invalid brand id format.")
+    .custom(async (value) => {
+      const brand = await BrandModal.findById(value);
+      if (!brand) throw new Error(`Brand not found with id: ${value}.`);
+      return true;
+    }),
+  body("category")
+    .optional()
+    .isMongoId()
+    .withMessage("Invalid category id format.")
+    .custom(async (value) => {
+      const category = await CategoryModal.findById(value);
+      if (!category) throw new Error(`Category not found with id: ${value}.`);
+      return true;
+    }),
+  body("subcategory")
+    .optional()
+    .isMongoId()
+    .withMessage("Invalid subcategory id format.")
+    .custom(async (value, { req }) => {
+      const subcategory = await SubcategoryModal.findById(value);
+      if (!subcategory)
+        throw new Error(`Subcategory not found with id: ${value}.`);
+      else if (subcategory.category.toString() !== req.body.category)
+        throw new Error(
+          `The subcategory provided does not belong to the category provided.`
+        );
+      return true;
+    }),
   validatorMiddleware,
 ];
 
